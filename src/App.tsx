@@ -19,11 +19,13 @@ return (
                     <div className="inline-block sm:mr-2">
                         <FaRegMoon/>
                     </div>
-                    <button name="theme-switch">Dark</button>
+                    <button name="theme-switch">
+                        Dark
+                    </button>
                 </div>
             </div>
-            <div className="flex sm:flex-nowrap flex-wrap w-full h-16 mt-10">
-                <div className="w-4/5 sm:ml-20 ml-4">
+            <div className="flex sm:flex-nowrap flex-wrap w-full h-16 mt-16">
+                <div className="w-4/5 sm:ml-36 ml-4">
                     <InputBase
                         sx={{ ml: 1, flex: 1 }}
                         placeholder="Search for a country..."
@@ -51,7 +53,8 @@ return (
                     </FormControl>
                 </div>
             </div>
-            <div className="grid grid-cols-4 mt-6 ml-10">
+            <div className="sm:ml-16 ml-4 sm:mt-10 mt-24">
+                <Countries/>
             </div>
         </div>
 );
