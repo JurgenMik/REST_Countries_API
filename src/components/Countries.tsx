@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function Countries() {
+function Countries( {...getSearchCountry } : any) {
 
     interface countryInterface{
         population: number,
