@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState} from 'react';
 
-function Countries( {...getSearchCountry } : any) {
+function Countries( { getSearchCountry } : any) {
 
     interface countryInterface{
         population: number,
@@ -11,6 +11,7 @@ function Countries( {...getSearchCountry } : any) {
     };
 
     const [countries, setCountries] = React.useState<countryInterface[]>([]);
+    const searchedCountry : any = [];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,12 +23,21 @@ function Countries( {...getSearchCountry } : any) {
             .catch(console.error);
     }, []);
 
-return (
-    <div className="w-full h-80 grid sm:grid-cols-4 grid-cols-1 justify-items-center gap-4">
-        {countries.map(({capital, region, flag, population, name}, key) => {
+    const filterMapping = () => {
+        if (!getSearchCountry.population || !getSearchCountry.name) {
+           return countries;
+         }
+        return searchedCountry.concat(getSearchCountry)
+    }
+
+   let filteredCountries = useMemo(filterMapping, [getSearchCountry, countries]);
+
+    return (
+    <div className="w-full h-80 grid sm:grid-cols-4 grid-cols-1 justify-items-center gap-y-24">
+        {filteredCountries.map(({capital, region, flag, population, name}: any, key: any) => {
         return(
-            <div className="sm:w-3/4 w-full h-full mb-4" key={key}>
-                <img className="sm:w-3/4 w-80 h-60 sm:ml-0 ml-2" src={flag} alt="country"/>
+            <div className="sm:w-8/12 w-full h-full mb-4" key={key}>
+                <img className="sm:w-3-4 w-80 h-60 sm:ml-0 ml-2" src={flag} alt="country"/>
                 <div className="mt-8 ml-10">
                     <h1 className="text-2xl font-bold">
                         {name}

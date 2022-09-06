@@ -8,13 +8,13 @@ import { FaRegMoon } from 'react-icons/fa';
 function App() {
 
     const [search, setSearch] = useState<string>();
-    const [getSearchCountry, setSearchCountry] = useState({
+    const [getSearchCountry, setSearchCountry] = useState<any>([{
         population: 0,
         name: '',
         region: '',
         capital: '',
         flag: '',
-    });
+    }]);
     const [timer, setTimer] = useState<any>(null);
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +55,7 @@ return (
                 </div>
             </div>
             <div className="flex sm:flex-nowrap flex-wrap w-full h-16 mt-16">
-                <div className="w-4/5 sm:ml-36 ml-4">
+                <div className="w-4/5 sm:ml-44 ml-4">
                     <InputBase
                         name="searchCountry"
                         placeholder="Search for a country..."
@@ -85,7 +85,7 @@ return (
                 </div>
             </div>
             <div className="sm:ml-16 ml-4 sm:mt-10 mt-24">
-                <Countries {...getSearchCountry} />
+                <Countries getSearchCountry={getSearchCountry}/>
             </div>
         </div>
 );
