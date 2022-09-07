@@ -36,11 +36,11 @@ function Countries( { getSearchCountry, selected } : any) {
    let filteredCountries = useMemo(filterMapping, [getSearchCountry, countries, selected]);
 
     return (
-    <div className="w-full h-80 grid sm:grid-cols-4 grid-cols-1 justify-items-center gap-y-24">
+    <div className="w-full h-80 grid sm:grid-cols-4 grid-cols-1 justify-items-center sm:gap-y-28 gap-y-16">
         {filteredCountries.map(({capital, region, flag, population, name}: any, key: any) => {
         return(
             <div className="sm:w-8/12 w-full h-full mb-4" key={key}>
-                <img className="sm:w-3-4 w-80 h-60 sm:ml-0 ml-2" src={flag} alt="country"/>
+                <img className="sm:w-3/4 w-80 h-60 sm:ml-0 ml-2" src={flag} alt="country"/>
                 <div className="mt-8 ml-10">
                     <h1 className="text-2xl font-bold">
                         {name}

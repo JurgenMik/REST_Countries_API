@@ -44,7 +44,7 @@ function App() {
 return (
         <div className="h-screen w-full">
             <div className="flex items-center w-full h-24 border-b-2 border-gray-300">
-                <div className="w-4/5 sm:ml-16 ml-4 sm:text-4xl text-xl font-bold">
+                <div className="w-4/5 sm:ml-32 ml-4 sm:text-4xl text-xl font-bold">
                     <h1>
                         Where in the world?
                     </h1>
