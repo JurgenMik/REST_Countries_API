@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import Countries from './components/Countries';
-import {FormControl, IconButton, InputBase, InputLabel, Select } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
+import {FormControl, IconButton, InputBase } from '@mui/material';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { FaRegMoon } from 'react-icons/fa';
 
 function App() {
 
-    const [search, setSearch] = useState<string>();
+    const [search, setSearch] = useState<String>();
     const [getSearchCountry, setSearchCountry] = useState<any>([{
         population: 0,
         name: '',
@@ -16,6 +15,11 @@ function App() {
         flag: '',
     }]);
     const [timer, setTimer] = useState<any>(null);
+    const [selected, setSelected] = useState<String>();
+
+    const handleSelect = (e : React.ChangeEvent<HTMLSelectElement>) => {
+        setSelected(e.target.value);
+    }
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
@@ -68,24 +72,23 @@ return (
                 </div>
                 <div className="w-1/5 sm:mt-0 mt-6 sm:ml-0 ml-6">
                     <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-                        <InputLabel id="region">
-                            Filter by Region
-                        </InputLabel>
-                        <Select
+                        <select
+                            name="region"
                             id="region"
-                            label="Filter"
+                            onChange={handleSelect}
                         >
-                            <MenuItem value="Africa">Africa</MenuItem>
-                            <MenuItem value="America">America</MenuItem>
-                            <MenuItem value="Asia">Asia</MenuItem>
-                            <MenuItem value="Europe">Europe</MenuItem>
-                            <MenuItem value="Oceania">Oceania</MenuItem>
-                        </Select>
+                            <option value={''}>Filter by Region</option>
+                            <option value="Africa">Africa</option>
+                            <option value="America">America</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Oceania">Oceania</option>
+                        </select>
                     </FormControl>
                 </div>
             </div>
             <div className="sm:ml-16 ml-4 sm:mt-10 mt-24">
-                <Countries getSearchCountry={getSearchCountry}/>
+                <Countries getSearchCountry={getSearchCountry} selected={selected}/>
             </div>
         </div>
 );

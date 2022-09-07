@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo } from 'react';
 
-function Countries( { getSearchCountry } : any) {
+function Countries( { getSearchCountry, selected } : any) {
 
     interface countryInterface{
         population: number,
@@ -24,13 +24,16 @@ function Countries( { getSearchCountry } : any) {
     }, []);
 
     const filterMapping = () => {
-        if (!getSearchCountry.population || !getSearchCountry.name) {
-           return countries;
+        if (getSearchCountry.population || getSearchCountry.name) {
+            return searchedCountry.concat(getSearchCountry);
          }
-        return searchedCountry.concat(getSearchCountry)
+        if (selected) {
+            return countries.filter(prop => prop.region === selected);
+        }
+        return countries;
     }
 
-   let filteredCountries = useMemo(filterMapping, [getSearchCountry, countries]);
+   let filteredCountries = useMemo(filterMapping, [getSearchCountry, countries, selected]);
 
     return (
     <div className="w-full h-80 grid sm:grid-cols-4 grid-cols-1 justify-items-center gap-y-24">
