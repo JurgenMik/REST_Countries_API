@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Countries from './components/Countries';
+import DetailView from './components/DetailView';
 import {FormControl, IconButton } from '@mui/material';
 import { HiOutlineSearch } from 'react-icons/hi';
 import { FaRegMoon, FaMoon } from 'react-icons/fa';
@@ -17,6 +18,8 @@ function App() {
     const [timer, setTimer] = useState<any>(null);
     const [selected, setSelected] = useState<String>();
     const [themeSwitch, setTheme] = useState<String>('light');
+    const [switchView, setSwitchView] = useState<boolean>(false);
+    const [getCountryId, setCountryId] = useState<String>('');
 
     const handleSelect = (e : React.ChangeEvent<HTMLSelectElement>) => {
         setSelected(e.target.value);
@@ -32,6 +35,11 @@ function App() {
 
     const handleClick = () => {
         {themeSwitch === 'light' ? setTheme('dark') : setTheme('light')};
+    }
+
+    const detailed = (e : React.MouseEvent<HTMLImageElement>) => {
+        setSwitchView(true);
+        setCountryId(e.currentTarget.id);
     }
 
     const fetchbyName = async () => {
@@ -94,7 +102,14 @@ return (
                 </div>
             </div>
             <div className="sm:ml-16 ml-4 sm:mt-10 mt-24">
-                <Countries getSearchCountry={getSearchCountry} selected={selected}/>
+                {(() => {
+                    switch(switchView) {
+                        case true:
+                            return <DetailView countryId={getCountryId}/>
+                        default:
+                            return <Countries getSearchCountry={getSearchCountry} detailed={detailed} selected={selected}/>
+                    }
+                })()}
             </div>
         </div>
 );

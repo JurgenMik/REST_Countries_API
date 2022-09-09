@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 
-function Countries( { getSearchCountry, selected } : any) {
+function Countries( { getSearchCountry, selected, detailed } : any) {
 
     interface countryInterface{
         population: number,
@@ -39,8 +39,8 @@ function Countries( { getSearchCountry, selected } : any) {
     <div className="w-full h-80 grid sm:grid-cols-4 grid-cols-1 justify-items-center sm:gap-y-28 gap-y-16">
         {filteredCountries.map(({capital, region, flag, population, name}: any, key: any) => {
         return(
-            <div className="sm:w-8/12 w-full h-full mb-4" key={key}>
-                <img className="sm:w-3/4 w-80 h-60 sm:ml-0 ml-2" src={flag} alt="country"/>
+            <div className="sm:w-8/12 w-full h-full mb-4" onClick={detailed} id={name} key={key}>
+                <img className="sm:w-3/4 w-80 h-60 sm:ml-0 ml-2" src={flag} alt="countries"/>
                 <div className="mt-8 ml-10">
                     <h1 className="text-2xl font-bold">
                         {name}
