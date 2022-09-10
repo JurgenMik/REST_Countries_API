@@ -42,6 +42,10 @@ function App() {
         setCountryId(e.currentTarget.id);
     }
 
+    const handleBack = (e : React.MouseEvent<HTMLButtonElement>) => {
+        setSwitchView(false);
+    }
+
     const fetchbyName = async () => {
         const response = await fetch(`https://restcountries.com/v2/name/${search}?fields=capital,population,region,flag,name`);
         const json = await response.json();
@@ -105,7 +109,7 @@ return (
                 {(() => {
                     switch(switchView) {
                         case true:
-                            return <DetailView countryId={getCountryId}/>
+                            return <DetailView countryId={getCountryId} handleBack={handleBack}/>
                         default:
                             return <Countries getSearchCountry={getSearchCountry} detailed={detailed} selected={selected}/>
                     }

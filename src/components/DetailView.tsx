@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 
-function DetailView({ countryId } : any) {
+function DetailView({ countryId, handleBack} : any) {
 
     interface detailInterface{
         population: number,
@@ -54,7 +54,7 @@ function DetailView({ countryId } : any) {
     return(
         <div className="w-full h-screen">
             <div className="sm:ml-32 ml-6">
-                <button className="pr-8 pl-8 p-1 text-md rounded-md border border-gray-300" name="returnView">
+                <button onClick={handleBack} className="pr-8 pl-8 p-1 text-md rounded-md border border-gray-300" name="returnView">
                     <FaArrowLeft className="inline mr-2"/>
                     Back
                 </button>
